@@ -21,7 +21,7 @@ void ShowCur(bool Cursor)
 
 void SubThread()
 {
-
+	
 	while (gaming->isRunning())
 	{
 		//delete[]
@@ -49,7 +49,7 @@ void SubThread()
 			gaming->soundOff();
 			if (isSound)mciSendStringA("play die.mp3", 0, NULL, 0);
 			//mciSendStringA
-
+			ShowCur(false); //xóa dấu nháy con trỏ.
 
 			gaming->drawDie();
 			gotoXY(1, HEIGHT + 3);
@@ -57,13 +57,15 @@ void SubThread()
 			char temp = toupper(_getch());
 			if (temp == 'Y')
 			{
+				//system("pause");
 				gaming->startGame();
 				gaming->soundOn();
 				gaming->resetGame(LV_MIN);
 			}
-
-			else
-				exit(0);
+			
+			else exit(0);//if(temp!='E' )
+			
+				
 		}
 		if (gaming->getPeople().isFinish())
 		{
@@ -82,6 +84,7 @@ int main()
 	char temp;
 	FixConsoleWindow();
 	gaming->soundOn();
+	ShowCur(false); //xóa dấu nháy con trỏ.
 	gaming->DangNhap();
 	thread t1(SubThread);
 	//mciSendStringA
@@ -114,10 +117,12 @@ int main()
 				gaming->pauseGame(t1.native_handle());
 				system("cls");
 				gaming->loadGame();
-				gaming->startGame();
-				gaming->drawGame();
-				gaming->soundOn();
-
+				int lv = gaming->getLevel();
+				
+					gaming->startGame();
+					gaming->drawGame();
+					gaming->soundOn();
+				
 
 			}
 			else if (temp == 'E')
@@ -127,7 +132,6 @@ int main()
 					gaming->pauseGame(t1.native_handle());
 					delete gaming;
 					gaming = new game;
-					//mciSendStringA("stop nen.mp3", 0, NULL, 0);
 					gaming->DangNhap();
 					gaming->drawGame();
 
@@ -149,7 +153,12 @@ int main()
 		else
 		{
 			if (temp == 'Y')
+			{
+				//gaming->startGame();
 				gaming->startGame();
+				//gaming->soundOn();
+				//gaming->resetGame(LV_MIN);
+			}
 			else {
 				gaming->exitGame(t1.native_handle());
 				return 0;

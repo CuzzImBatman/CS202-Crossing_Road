@@ -105,12 +105,12 @@ void game::drawGame()
 }
 void game::drawBack(const int x, const int y)
 {
-	TextColor(40);
-	for (int i = 30; i <= 60; i++)
+	TextColor(178);
+	for (int i = 30; i <= 59; i++)
 	{
 		for (int j = y - 3; j <= y + 6; j++)
 		{
-			if (j == y - 3 || j == y + 6 || i == 30 || i == 60)
+			if (j == y - 3 || j == y + 6 || i == 30 || i == 59)
 			{
 				gotoXY(i, j);
 				cout << " ";
@@ -130,8 +130,6 @@ void game::DangNhap()
 	while (1)
 	{
 		clrscr();
-		int color = rand() % 7 + 9;
-		TextColor(40);
 		drawBack(x, y);
 		for (int i = 0; i < 4; i++)
 		{
@@ -347,22 +345,23 @@ void game::startGame()
 	gotoXY(WIDHT + 3, HEIGHT - 5);
 	cout << "       On/Off Sound";
 	TextColor(7);
-	TextColor(187);
-	for (int i = 1; i <= WIDHT + 25; i++)
+	TextColor(1400);
+	//TextColor(178);
+	for (int i = 0; i <= WIDHT + 25; i++)
 	{
 		gotoXY(i, 1);
-		cout << "*";
+		cout << " ";
 		gotoXY(i, HEIGHT);
-		cout << "*";
+		cout << " ";
 	}
 	for (int i = 2; i < HEIGHT; i++)
 	{
 		gotoXY(0, i);
-		cout << "*";
+		cout << " ";
 		gotoXY(WIDHT, i);
-		cout << "*";
+		cout << " ";
 		gotoXY(WIDHT + 25, i);
-		cout << "*";
+		cout << " ";
 	}
 	TextColor(7);
 }
@@ -511,14 +510,10 @@ void game::drawDie()
 {
 	system("cls");
 	TextColor(ColorCode_White);
-	gotoXY(WIDHT + 3, HEIGHT - 13);
-	cout << "Press E to Exit";
-	gotoXY(WIDHT + 3, HEIGHT - 12);
-	cout << "Press T to LoadGame";
-	gotoXY(WIDHT + 3, HEIGHT - 6);
+	/*gotoXY(WIDHT + 3, HEIGHT - 12);
 	cout << "Press SPACE to Turn";
-	gotoXY(WIDHT + 3, HEIGHT - 5);
-	cout << "       On/Off Sound";
+	gotoXY(WIDHT + 3, HEIGHT - 11);
+	cout << "       On/Off Sound";*/
 	for (int i = 1; i <= WIDHT + 25; i++)
 	{
 		gotoXY(i, 1);
