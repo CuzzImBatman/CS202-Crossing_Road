@@ -279,6 +279,7 @@ void game::gameSetting()
 					}
 					case 2:
 					{
+						if(!isSound())
 						mciSendStringA("play nen.mp3", 0, NULL, 0);
 						sound = true;
 						flag = 1;
