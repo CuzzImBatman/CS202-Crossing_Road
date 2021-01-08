@@ -2,3 +2,5 @@ D:\VS\Project\x64\Debug\Project.exe
 D:\VS\Project\x64\Debug\Project.pdb
 D:\CS202-Crossing_Road\x64\Debug\Project.exe
 D:\CS202-Crossing_Road\x64\Debug\Project.pdb
+C:\Users\Wolfris\Documents\GitHub\CS202-Crossing_Road\x64\Debug\Project.exe
+C:\Users\Wolfris\Documents\GitHub\CS202-Crossing_Road\x64\Debug\Project.pdb

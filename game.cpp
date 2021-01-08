@@ -332,7 +332,7 @@ void game::startGame()
 	gotoXY(WIDHT + 3, HEIGHT - 12);
 	cout << "Press S to DOWN";
 	gotoXY(WIDHT + 3, HEIGHT - 11);
-	cout << "Press F to RIGHT";
+	cout << "Press D to RIGHT";
 	gotoXY(WIDHT + 3, HEIGHT - 10);
 	cout << "Press P to PauseGame";
 	gotoXY(WIDHT + 3, HEIGHT - 9);
