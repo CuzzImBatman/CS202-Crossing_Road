@@ -272,7 +272,7 @@ void game::gameSetting()
 					}
 					case 1:
 					{
-						mciSendStringA("stop nen.mp3", 0, NULL, 0);
+						mciSendStringA("stop background.mp3", 0, NULL, 0);
 						sound = false;
 						flag = 1;
 						break;
@@ -280,7 +280,7 @@ void game::gameSetting()
 					case 2:
 					{
 						if(!isSound())
-						mciSendStringA("play nen.mp3", 0, NULL, 0);
+						mciSendStringA("play background.mp3", 0, NULL, 0);
 						sound = true;
 						flag = 1;
 						break;
