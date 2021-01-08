@@ -1,4 +1,10 @@
-﻿  cPeoPle.cpp
+﻿  cAnimal.cpp
+  console.cpp
+  cPeoPle.cpp
+  cTraffic.cpp
+  cVehicle.cpp
+  game.cpp
   Project.cpp
   Generating Code...
-  Project.vcxproj -> D:\VS\Project\x64\Debug\Project.exe
+  LINK : D:\CS202-Crossing_Road\x64\Debug\Project.exe not found or not built by the last incremental link; performing full link
+  Project.vcxproj -> D:\CS202-Crossing_Road\x64\Debug\Project.exe

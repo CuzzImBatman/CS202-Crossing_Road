@@ -13,12 +13,15 @@ void FixConsoleWindow()
 void ShowCur(bool Cursor)
 {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_CURSOR_INFO cursor = { 1, Cursor };
+	CONSOLE_CURSOR_INFO cursor;
+	cursor.bVisible = Cursor;
+	cursor.dwSize = 20;
 	SetConsoleCursorInfo(handle, &cursor);
 }
 
 void SubThread()
 {
+
 	while (gaming->isRunning())
 	{
 		//delete[]
@@ -36,10 +39,15 @@ void SubThread()
 		gaming->updateTraffic();
 		gaming->drawGame(); //ve
 		int lv = gaming->getLevel();
-		if (gaming->getPeople().isImpact(gaming->getBird(), lv) || gaming->getPeople().isImpact(gaming->getDinausor(), lv)
-			|| gaming->getPeople().isImpact(gaming->getCar(), lv) || gaming->getPeople().isImpact(gaming->getTruck(), lv))
+		if (gaming->getPeople().isImpact(gaming->getBird(), lv)
+			|| gaming->getPeople().isImpact(gaming->getDinausor(), lv)
+			|| gaming->getPeople().isImpact(gaming->getCar(), lv)
+			|| gaming->getPeople().isImpact(gaming->getTruck(), lv))
 		{
 			//DIE
+			bool isSound = gaming->isSound();
+			gaming->soundOff();
+			if (isSound)mciSendStringA("play die.mp3", 0, NULL, 0);
 			//mciSendStringA
 
 
@@ -52,7 +60,7 @@ void SubThread()
 				system("pause");
 
 				gaming->startGame();
-				mciSendStringA("play nen.mp3", 0, NULL, 0);
+				gaming->soundOn();
 				gaming->resetGame(LV_MIN);
 			}
 
@@ -75,11 +83,15 @@ int main()
 	gaming = new game;
 	char temp;
 	FixConsoleWindow();
+	gaming->soundOn();
 	gaming->DangNhap();
-	//mciSendStringA
 	thread t1(SubThread);
+	//mciSendStringA
+
+
 	while (1)
 	{
+
 		ShowCur(false); //xóa dấu nháy con trỏ.
 		temp = toupper(_getch());
 		if (!gaming->getPeople().isDead())
@@ -100,15 +112,34 @@ int main()
 			}
 			else if (temp == 'T')
 			{
-				//mciSendStringA dừng nhạc
+				gaming->soundOff();
 				gaming->pauseGame(t1.native_handle());
 				system("cls");
 				gaming->loadGame();
 				gaming->startGame();
 				gaming->drawGame();
-				//mciSendStringA lên nhạc
+				gaming->soundOn();
 
 
+			}
+			else if (temp == 'E')
+			{
+				{
+					//gaming->soundOff();
+					gaming->pauseGame(t1.native_handle());
+					delete gaming;
+					gaming = new game;
+					//mciSendStringA("stop nen.mp3", 0, NULL, 0);
+					gaming->DangNhap();
+					gaming->drawGame();
+
+
+				}
+			}
+			else if (temp == 32)
+			{
+				if (gaming->isSound())gaming->soundOff();
+				else gaming->soundOn();
 			}
 			else
 			{
@@ -116,6 +147,7 @@ int main()
 				INPUT_KEY = temp; //UPDATE KEY
 			}
 		}
+
 		else
 		{
 			if (temp == 'Y')
@@ -125,12 +157,9 @@ int main()
 				return 0;
 			}
 		}
+
 	}
 	return 0;
-	vector<int> v;
 
-	for (int i = 1; i <= 5; i++)
-		v.push_back(i);
-	v.erase(v.begin(), v.begin() + 3);
 }
 

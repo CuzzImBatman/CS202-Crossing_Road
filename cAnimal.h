@@ -14,7 +14,11 @@ public:
 
 	}
 	virtual void draw() = 0;
-
+	void new_map()
+	{
+		//delete[]a;
+		//unordered_map<int,int>* a= getmap();
+	}
 
 	void move();
 

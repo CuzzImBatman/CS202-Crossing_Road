@@ -13,7 +13,7 @@ public:
 	}
 	void draw()
 	{
-		TextColor(ColorCode_Green);
+		TextColor(ColorCode_Yellow);
 		gotoXY(m_x, m_y);
 		printf("%c", 219);
 		gotoXY(m_x, m_y - 1);

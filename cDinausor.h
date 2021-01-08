@@ -1,6 +1,6 @@
 #pragma once
 #include "cAnimal.h"
-#include "console1.h"
+
 class cDinausor : public cAnimal
 {
 public:
@@ -14,7 +14,7 @@ public:
 	}
 	void draw()
 	{
-		TextColor(ColorCode_Red);
+		TextColor(ColorCode_DarkBlue);
 		gotoXY(m_x + 1, m_y - 1);
 		printf("%c", 220);
 		gotoXY(m_x + 1, m_y);

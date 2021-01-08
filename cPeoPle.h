@@ -20,8 +20,8 @@ public:
 	bool isDead();
 	void draw();
 	void deleteChar();
-	bool isImpact(cTruck *, int lv);
-	bool isImpact(cCar *, int lv);
-	bool isImpact(cBird *, int lv);
-	bool isImpact(cDinausor *, int lv);
+	bool isImpact(cTruck*, int lv);
+	bool isImpact(cCar*, int lv);
+	bool isImpact(cBird*, int lv);
+	bool isImpact(cDinausor*, int lv);
 };

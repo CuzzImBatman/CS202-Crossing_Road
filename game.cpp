@@ -22,7 +22,7 @@ void game::lvUp()
 	{
 		gotoXY(2, HEIGHT + 2);
 		cout << "You win";
-		_getch();
+		//_getch();
 		exit(0);
 	}
 	m_level++;
@@ -103,8 +103,25 @@ void game::drawGame()
 	printf("%c", 223);
 	TextColor(7);
 }
+void game::drawBack(const int x, const int y)
+{
+	TextColor(40);
+	for (int i = 30; i <= 60; i++)
+	{
+		for (int j = y - 3; j <= y + 6; j++)
+		{
+			if (j == y - 3 || j == y + 6 || i == 30 || i == 60)
+			{
+				gotoXY(i, j);
+				cout << " ";
+			}
+		}
+	}
+	TextColor(7);
+}
 void game::DangNhap()
 {
+	//mciSendStringA("play nen.mp3", 0, NULL, 0);
 	string menu[] = { "Start Game", "Load Game", "Setting","Exit" };
 	int pos = 0;
 	const int y = 10;
@@ -114,24 +131,13 @@ void game::DangNhap()
 	{
 		clrscr();
 		int color = rand() % 7 + 9;
-		TextColor(238);
-		for (int i = 30; i <= 60; i++)
-		{
-			for (int j = y - 5; j <= y + 5; j++)
-			{
-				if (j == y - 5 || j == y + 5 || i == 30 || i == 60)
-				{
-					gotoXY(i, j);
-					cout << "*";
-				}
-			}
-		}
-		TextColor(7);
+		TextColor(40);
+		drawBack(x, y);
 		for (int i = 0; i < MAX_LIST; i++)
 		{
 			if (i == pos)
 			{
-				TextColor(227);
+				TextColor(250);
 				gotoXY(x, y + i);
 				cout << menu[i];
 				TextColor(7);
@@ -204,7 +210,7 @@ void game::DangNhap()
 void game::gameSetting()
 {
 	system("cls");
-	string setting[] = { "Do Kho", "Tat Am Thanh" ,"Menu" };
+	string setting[] = { "Do Kho", "Tat Am Thanh" ,"Bat Am Thanh" ,"Menu" };
 	int pos1 = 0;
 	const int y = 10;
 	const int x = 40;
@@ -212,26 +218,13 @@ void game::gameSetting()
 	while (!flag)
 	{
 		system("cls");
-		int color = rand() % 7 + 9;
 
-		TextColor(238);
-		for (int i = 30; i <= 60; i++)
-		{
-			for (int j = y - 5; j <= y + 5; j++)
-			{
-				if (j == y - 5 || j == y + 5 || i == 30 || i == 60)
-				{
-					gotoXY(i, j);
-					cout << "*";
-				}
-			}
-		}
-		TextColor(7);
+		drawBack(x, y);
 		for (int i = 0; i < MAX_LIST - 1; i++)
 		{
 			if (i == pos1)
 			{
-				TextColor(227);
+				TextColor(250);
 				gotoXY(x, y + i);
 				cout << setting[i];
 				TextColor(7);
@@ -269,16 +262,31 @@ void game::gameSetting()
 					{
 					case 0:
 					{
+						system("cls");
+						drawBack(x, y);
+						gotoXY(x, y);
+						cout << "Nhap do kho: ";
+						cin >> m_level;
 						flag = 1;
 						break;
 					}
 					case 1:
 					{
+						mciSendStringA("stop nen.mp3", 0, NULL, 0);
+						sound = false;
 						flag = 1;
 						break;
 					}
 					case 2:
 					{
+						mciSendStringA("play nen.mp3", 0, NULL, 0);
+						sound = true;
+						flag = 1;
+						break;
+					}
+					case 3:
+					{
+
 						flag = 1;
 						break;
 					}
@@ -295,6 +303,21 @@ void game::gameSetting()
 		game::DangNhap();
 		game::drawGame();
 	}
+}
+bool game::isSound()
+{
+	return sound;
+}
+void game::soundOn()
+{
+	sound = true;
+	mciSendStringA("play background.mp3", 0, NULL, 0);
+}
+
+void game::soundOff()
+{
+	sound = false;
+	mciSendStringA("stop background.mp3", 0, NULL, 0);
 }
 void game::startGame()
 {
@@ -318,6 +341,10 @@ void game::startGame()
 	cout << "Press E to Exit";
 	gotoXY(WIDHT + 3, HEIGHT - 7);
 	cout << "Press T to LoadGame";
+	gotoXY(WIDHT + 3, HEIGHT - 6);
+	cout << "Press SPACE to Turn";
+	gotoXY(WIDHT + 3, HEIGHT - 5);
+	cout << "       On/Off Sound";
 	TextColor(7);
 	TextColor(187);
 	for (int i = 1; i <= WIDHT + 25; i++)
@@ -362,7 +389,7 @@ void game::updatePosPeople(char moving)
 	{
 		peoPle.Up();
 	}
-	else if (moving == 'f' || moving == 'F')
+	else if (moving == 'd' || moving == 'D')
 	{
 		peoPle.Right();
 	}
@@ -483,24 +510,14 @@ void game::drawDie()
 {
 	system("cls");
 	TextColor(ColorCode_White);
-	gotoXY(WIDHT + 3, HEIGHT - 15);
-	cout << "level: ";
-	gotoXY(WIDHT + 3, HEIGHT - 10);
-	cout << "Press W to UP";
 	gotoXY(WIDHT + 3, HEIGHT - 13);
-	cout << "Press A to LEFT";
-	gotoXY(WIDHT + 3, HEIGHT - 12);
-	cout << "Press S to DOWN";
-	gotoXY(WIDHT + 3, HEIGHT - 11);
-	cout << "Press D to RIGHT";
-	gotoXY(WIDHT + 3, HEIGHT - 10);
-	cout << "Press P to PauseGame";
-	gotoXY(WIDHT + 3, HEIGHT - 9);
-	cout << "Press L to SaveGame";
-	gotoXY(WIDHT + 3, HEIGHT - 8);
 	cout << "Press E to Exit";
-	gotoXY(WIDHT + 3, HEIGHT - 7);
+	gotoXY(WIDHT + 3, HEIGHT - 12);
 	cout << "Press T to LoadGame";
+	gotoXY(WIDHT + 3, HEIGHT - 6);
+	cout << "Press SPACE to Turn";
+	gotoXY(WIDHT + 3, HEIGHT - 5);
+	cout << "       On/Off Sound";
 	for (int i = 1; i <= WIDHT + 25; i++)
 	{
 		gotoXY(i, 1);
@@ -539,5 +556,45 @@ void game::loadGame()
 		clrscr();
 		return;
 	}
-
+	delete[] car;
+	delete[] truck;
+	delete[] bird;
+	delete[] dinausor;
+	loadfile >> m_level;
+	car = new cCar[m_level];
+	truck = new cTruck[m_level];
+	bird = new cBird[m_level];
+	dinausor = new cDinausor[m_level];
+	int x, y, status, time;
+	loadfile >> x;
+	loadfile >> y;
+	peoPle.set(x, y);
+	loadfile >> status;
+	loadfile >> time;
+	trafic.set(status, time);
+	for (int i = 0; i < m_level; i++)
+	{
+		loadfile >> x;
+		loadfile >> y;
+		car[i].set(x, y);
+	}
+	for (int i = 0; i < m_level; i++)
+	{
+		loadfile >> x;
+		loadfile >> y;
+		truck[i].set(x, y);
+	}
+	for (int i = 0; i < m_level; i++)
+	{
+		loadfile >> x;
+		loadfile >> y;
+		bird[i].set(x, y);
+	}
+	for (int i = 0; i < m_level; i++)
+	{
+		loadfile >> x;
+		loadfile >> y;
+		dinausor[i].set(x, y);
+	}
+	loadfile.close();
 }
