@@ -57,8 +57,6 @@ void SubThread()
 			char temp = toupper(_getch());
 			if (temp == 'Y')
 			{
-				system("pause");
-
 				gaming->startGame();
 				gaming->soundOn();
 				gaming->resetGame(LV_MIN);
