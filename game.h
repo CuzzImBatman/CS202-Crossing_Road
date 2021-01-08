@@ -7,7 +7,6 @@
 #include <fstream>
 #include <time.h>
 #pragma comment(lib,"winmm.lib")
-#define MAX_LIST 4
 #define LV_MAX 8
 #define LV_MIN 3
 const int y_bird = 16;

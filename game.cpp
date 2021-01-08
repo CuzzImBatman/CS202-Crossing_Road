@@ -133,7 +133,7 @@ void game::DangNhap()
 		int color = rand() % 7 + 9;
 		TextColor(40);
 		drawBack(x, y);
-		for (int i = 0; i < MAX_LIST; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			if (i == pos)
 			{
@@ -158,12 +158,12 @@ void game::DangNhap()
 					if (pos > 0)
 						pos--;
 					else
-						pos = MAX_LIST - 1;
+						pos = 3;
 					break;
 				}
 				if (key == 'S' || key == 's')
 				{
-					if (pos < MAX_LIST - 1)
+					if (pos < 3)
 						pos++;
 					else
 						pos = 0;
@@ -220,7 +220,7 @@ void game::gameSetting()
 		system("cls");
 
 		drawBack(x, y);
-		for (int i = 0; i < MAX_LIST - 1; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			if (i == pos1)
 			{
@@ -245,12 +245,12 @@ void game::gameSetting()
 					if (pos1 > 0)
 						pos1--;
 					else
-						pos1 = MAX_LIST - 2;
+						pos1 = 3;
 					break;
 				}
 				if (key == 'S' || key == 's')
 				{
-					if (pos1 < MAX_LIST - 1 - 1)
+					if (pos1 < 3)
 						pos1++;
 					else
 						pos1 = 0;
